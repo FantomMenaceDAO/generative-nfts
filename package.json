@@ -1,0 +1,26 @@
+{
+  "name": "generative-nft-ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "July <0xjuly@protonmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^16.11.7",
+    "typescript": "^4.4.4"
+  },
+  "devDependencies": {
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.6",
+    "prettier": "^2.4.1",
+    "ts-node": "^10.4.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./bin/app.js",
+    "dev": "ts-node ./src/app.ts",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  }
+}
