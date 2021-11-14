@@ -21,18 +21,17 @@ export function getAll(): NFTs {
 
   const nfts: NFTs = [];
   for (let i = 0; i < 20; i++) {
-    let nft = {
-      id: i + 1,
-      attributes: {
-        [AttributeType.Background]: backgrounds[i],
-        [AttributeType.Figure]: figures[i],
-      },
-    };
-    nfts.push(nft);
-  }
-
-  for (let nft of nfts) {
-    console.log(nft);
+    for (let j = 0; j < 20; j++) {
+      let nft = {
+        id: i + 1,
+        attributes: {
+          [AttributeType.Background]: backgrounds[i],
+          [AttributeType.Figure]: figures[j],
+        },
+      };
+      console.log(`created nft id: ${i + 1}`);
+      nfts.push(nft);
+    }
   }
 
   return nfts;

@@ -6,8 +6,6 @@ export const compositeImages = async (
   fileName: string
 ) => {
   try {
-    console.log(topImg);
-    console.log(bottomImg);
     await sharp(bottomImg)
       .composite([{ input: topImg }])
       .sharpen()
