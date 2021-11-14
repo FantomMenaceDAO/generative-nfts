@@ -13,7 +13,7 @@ export enum AttributeType {
 
 export interface Attribute {
   name?: string;
-  description?: string;
+  value?: string;
   image?: string;
   attr_type: AttributeType;
 }
@@ -21,12 +21,12 @@ export interface Attribute {
 export interface Attributes extends Array<Attribute> {}
 
 export class AttributeFactory {
-  static create(nft: Attribute): Attribute {
+  static create(attr: Attribute): Attribute {
     return {
-      name: nft.name,
-      description: nft.description,
-      image: nft.image,
-      attr_type: nft.attr_type,
+      name: attr.name,
+      value: attr.value,
+      image: attr.image,
+      attr_type: attr.attr_type,
     };
   }
 
@@ -42,7 +42,7 @@ export class AttributeFactory {
         let attribute = AttributeFactory.create({
           name: `${dist.name}-${i + 1}`,
           image: `${dist.path}/${i + 1}.png`,
-          description: `${dist.name}`,
+          value: `${dist.name}`,
           attr_type: attr_type,
         });
         attributes.push(attribute);
@@ -51,9 +51,9 @@ export class AttributeFactory {
 
     // return shuffled attributes
     return attributes
-      .map((value) => ({ value, sort: Math.random() }))
+      .map((v) => ({ v, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
-      .map(({ value }) => value);
+      .map(({ v }) => v);
   }
 }
 

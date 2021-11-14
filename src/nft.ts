@@ -4,13 +4,19 @@ import {
   Attribute,
   AttributeFactory as AF,
 } from "./attributes";
+import { promises as fs } from "fs";
 
-type AttributeName = string;
+type TraitType = string;
 
 interface NFT {
   id: number;
-  attributes: Record<AttributeName, Attribute>;
+  name: string;
+  description: string;
+  image: string;
+  attributes: Record<TraitType, Attribute>;
 }
+
+const BASE_NAME = "darth malls";
 
 export interface NFTs extends Array<NFT> {}
 
@@ -20,19 +26,52 @@ export function getAll(): NFTs {
   let backgrounds: Attributes = AF.createAttributes(AttributeType.Background);
 
   const nfts: NFTs = [];
+  let counter = 1;
+  // go through each background and add each figure
   for (let i = 0; i < 20; i++) {
+    let bg: Attribute = backgrounds[i];
     for (let j = 0; j < 20; j++) {
+      let figure: Attribute = figures[j];
       let nft = {
-        id: i + 1,
+        id: counter,
+        name: `${figure.name} at the ${bg.name}`,
+        description: "this is an nft",
+        image: "string",
         attributes: {
           [AttributeType.Background]: backgrounds[i],
           [AttributeType.Figure]: figures[j],
         },
       };
-      console.log(`created nft id: ${i + 1}`);
+      console.log(`created nft id: ${i + counter}`);
+      console.log(nft);
+
+      // create a metadata json file for ipfs from nft metadata
+      writeJsonToMetadata(nft);
+
+      // add to nfts vector
       nfts.push(nft);
+
+      // increment conuter
+      counter++;
     }
   }
 
   return nfts;
 }
+
+const writeJsonToMetadata = async (nft: NFT) => {
+  try {
+    const data = {
+      name: nft.name,
+      description: nft.description,
+      image: nft.image,
+      attributes: nft.attributes,
+    };
+    await fs.writeFile(
+      `output/metadata/${nft.id}.json`,
+      JSON.stringify(data, null, 4)
+    );
+  } catch (err) {
+    console.error(err);
+  }
+};

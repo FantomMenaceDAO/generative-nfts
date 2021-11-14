@@ -9,7 +9,7 @@ export const compositeImages = async (
     await sharp(bottomImg)
       .composite([{ input: topImg }])
       .sharpen()
-      .toFile(`output/${fileName}.png`);
+      .toFile(`output/images/${fileName}.png`);
   } catch (error) {
     console.log(error);
   }
