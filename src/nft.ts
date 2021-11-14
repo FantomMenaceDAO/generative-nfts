@@ -4,11 +4,9 @@ import {
   Attribute,
   AttributeFactory as AF,
 } from "./attributes";
-import { promises as fs } from "fs";
 
 type TraitType = string;
-
-interface NFT {
+export interface NFT {
   id: number;
   name: string;
   description: string;
@@ -42,11 +40,9 @@ export function getAll(): NFTs {
           [AttributeType.Figure]: figures[j],
         },
       };
-      console.log(`created nft id: ${i + counter}`);
+      console.log(`\n`);
+      console.log(`created nft id: ${counter}`);
       console.log(nft);
-
-      // create a metadata json file for ipfs from nft metadata
-      writeJsonToMetadata(nft);
 
       // add to nfts vector
       nfts.push(nft);
@@ -58,20 +54,3 @@ export function getAll(): NFTs {
 
   return nfts;
 }
-
-const writeJsonToMetadata = async (nft: NFT) => {
-  try {
-    const data = {
-      name: nft.name,
-      description: nft.description,
-      image: nft.image,
-      attributes: nft.attributes,
-    };
-    await fs.writeFile(
-      `output/metadata/${nft.id}.json`,
-      JSON.stringify(data, null, 4)
-    );
-  } catch (err) {
-    console.error(err);
-  }
-};
