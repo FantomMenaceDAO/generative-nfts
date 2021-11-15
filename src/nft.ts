@@ -26,13 +26,13 @@ export function getAll(): NFTs {
   const nfts: NFTs = [];
   let counter = 1;
   // go through each background and add each figure
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 21; i++) {
     let bg: Attribute = backgrounds[i];
-    for (let j = 0; j < 20; j++) {
+    for (let j = 0; j < 27; j++) {
       let figure: Attribute = figures[j];
       let nft = {
         id: counter,
-        name: `${figure.name} at the ${bg.name}`,
+        name: `${figure.name} at ${bg.name}`,
         description: "this is an nft",
         image: "string",
         attributes: {
