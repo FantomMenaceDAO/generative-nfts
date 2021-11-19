@@ -5,7 +5,12 @@
   "author": "July <0xjuly@protonmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@pinata/sdk": "^1.1.23",
+    "@types/axios": "^0.14.0",
+    "@types/form-data": "^2.5.0",
     "@types/node": "^16.11.7",
+    "axios": "^0.24.0",
+    "dotenv": "^10.0.0",
     "sharp": "^0.29.2",
     "typescript": "^4.4.4"
   },

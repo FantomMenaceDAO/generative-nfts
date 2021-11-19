@@ -1,56 +1,69 @@
-import {
-  Attributes,
-  AttributeType,
-  Attribute,
-  AttributeFactory as AF,
-} from "./attributes";
+import * as sharp from "sharp";
+import { Metadata } from "./metadata";
+import { Attribute, AttributeType } from "./attributes";
 
-type TraitType = string;
 export interface NFT {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-  attributes: Record<TraitType, Attribute>;
+  localImagePath: string;
+  metadata: Metadata;
 }
-
-const BASE_NAME = "darth malls";
-
 export interface NFTs extends Array<NFT> {}
 
-export function getAll(): NFTs {
-  // get all attribute types
-  let figures: Attributes = AF.createAttributes(AttributeType.Figure);
-  let backgrounds: Attributes = AF.createAttributes(AttributeType.Background);
-
-  const nfts: NFTs = [];
-  let counter = 1;
-  // go through each background and add each figure
-  for (let i = 0; i < 21; i++) {
-    let bg: Attribute = backgrounds[i];
-    for (let j = 0; j < 27; j++) {
-      let figure: Attribute = figures[j];
-      let nft = {
-        id: counter,
-        name: `${figure.name} at ${bg.name}`,
-        description: "this is an nft",
-        image: "string",
-        attributes: {
-          [AttributeType.Background]: backgrounds[i],
-          [AttributeType.Figure]: figures[j],
-        },
-      };
-      console.log(`\n`);
-      console.log(`created nft id: ${counter}`);
-      console.log(nft);
-
-      // add to nfts vector
-      nfts.push(nft);
-
-      // increment conuter
-      counter++;
-    }
+export const generateNFTsFromMetadata = async (
+  metadata_array: Metadata[]
+): Promise<NFTs> => {
+  let nfts: NFTs = [];
+  for (let metadata of metadata_array) {
+    let image_path = await generateImageFromMetadata(metadata);
+    let nft = {
+      localImagePath: image_path,
+      metadata: metadata,
+    };
+    nfts.push(nft);
   }
-
   return nfts;
-}
+};
+
+const generateImageFromMetadata = async (metadata: Metadata) => {
+  let attrsMap: Map<string, Attribute> = metadata.attributesMap;
+  let filepath = await compositeImages(
+    attrsMap.get(AttributeType.Background).image,
+    attrsMap.get(AttributeType.Figure).image,
+    `${metadata.id}`
+  );
+  console.log(filepath);
+  return filepath;
+};
+
+const compositeImages = async (
+  topImg: string,
+  bottomImg: string,
+  filename: string
+): Promise<string> => {
+  try {
+    let filepath = `output/images/${filename}.png`;
+    await sharp(bottomImg)
+      .composite([{ input: topImg }])
+      .sharpen()
+      .toFile(filepath);
+    return filepath;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const generateJSONFromNFTs = async (nft: NFTs) => {
+  // try {
+  //   const data = {
+  //     name: nft.name,
+  //     description: nft.description,
+  //     image: nft.image,
+  //     attributes: nft.attributes,
+  //   };
+  //   await fs.writeFile(
+  //     `output/metadata/${nft.id}.json`,
+  //     JSON.stringify(data, null, 4)
+  //   );
+  // } catch (err) {
+  //   console.error(err);
+  // }
+};
