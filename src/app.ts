@@ -1,6 +1,6 @@
-import * as nft from "./nft";
 import { generateMetadata } from "./metadata";
-import { uploadNFTsToIPFS } from "./ipfs";
+import { generateJSONFromMetadata, generateNFTsFromMetadata } from "./nft";
+import { generateCollectionFromNFTs } from "./collection";
 import * as dotenv from "dotenv";
 import { resolve } from "path";
 
@@ -10,15 +10,14 @@ async function main(): Promise<void> {
   // get nft metadata required for generation
   let metadata = generateMetadata();
 
-  let nfts = await nft.generateNFTsFromMetadata(metadata);
+  // generates images and returns NFT objects
+  let nfts = await generateNFTsFromMetadata(metadata);
 
   // upload to IPFS
-  uploadNFTsToIPFS(nfts);
+  let nftCollection = await generateCollectionFromNFTs(nfts);
 
   // generate json file of nft
-  // for (let n of nfts) {
-  // generateJSONFromMetadata(metadata);
-  // }
+  generateJSONFromMetadata(nftCollection);
 }
 
 // run main

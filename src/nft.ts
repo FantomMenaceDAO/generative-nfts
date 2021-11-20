@@ -1,6 +1,8 @@
 import * as sharp from "sharp";
 import { Metadata } from "./metadata";
 import { Attribute, AttributeType } from "./attributes";
+import * as fs from "fs";
+import { NFTCollection } from "./collection";
 
 export interface NFT {
   localImagePath: string;
@@ -51,19 +53,25 @@ const compositeImages = async (
   }
 };
 
-export const generateJSONFromNFTs = async (nft: NFTs) => {
-  // try {
-  //   const data = {
-  //     name: nft.name,
-  //     description: nft.description,
-  //     image: nft.image,
-  //     attributes: nft.attributes,
-  //   };
-  //   await fs.writeFile(
-  //     `output/metadata/${nft.id}.json`,
-  //     JSON.stringify(data, null, 4)
-  //   );
-  // } catch (err) {
-  //   console.error(err);
-  // }
+export const generateJSONFromMetadata = async (
+  nftCollection: NFTCollection
+) => {
+  try {
+    for (let nft of nftCollection.nfts) {
+      let filepath = `output/metadata/${nft.metadata.id}.json`;
+      const data = {
+        name: nft.metadata.name,
+        description: nft.metadata.description,
+        image: `ipfs://${nftCollection.imagesIpfsHash}/${nft.metadata.id}.png`,
+        attributes: nft.metadata.attributesMap,
+      };
+
+      fs.writeFileSync(
+        `output/metadata/${nft.metadata.id}.json`,
+        JSON.stringify(data, null, 4)
+      );
+    }
+  } catch (err) {
+    console.error(err);
+  }
 };
