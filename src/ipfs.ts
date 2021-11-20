@@ -1,9 +1,8 @@
 const pinataSDK = require("@pinata/sdk");
 import * as dotenv from "dotenv";
-// import * as fs from 'fs';
+import * as fs from "fs";
 import { NFTs, NFT } from "./nft";
 import axios from "axios";
-const fs = require("fs");
 const FormData = require("form-data");
 const recursive = require("recursive-fs");
 const basePathConverter = require("base-path-converter");
@@ -21,10 +20,9 @@ const readDirectory = async (dir: string): Promise<string[]> => {
 export const getFormDataFromDirectory = async (name, dir) => {
   // we gather the files from a local directory in this example,
   // but a valid readStream is all that's needed for each file in the directory.
-  // console.log(await readDirectory(src));
-  // recursive.readdirr(src, function (err, dirs, files) {
   let data = new FormData();
   let files = await readDirectory(dir);
+
   // natural sort of alphanumerical strings
   files = files.sort(function (a, b) {
     return a.localeCompare(b, undefined, {
@@ -67,7 +65,6 @@ export const pinDirectoryToIPFS = async (formData): Promise<string> => {
       },
     })
     .then(function (response) {
-      // console.log(response.data);
       return response.data.IpfsHash;
     })
     .catch(function (error) {
@@ -84,3 +81,12 @@ export const uploadDirectoryToIPFS = async (
   let ipfsHash = await pinDirectoryToIPFS(files);
   return ipfsHash;
 };
+
+// export const uploadJSONDirectoryToIPFS = async (
+//     name: string,
+//     directory: string
+//   ): Promise<string> => {
+//     let files = await getFormDataFromDirectory(name, directory);
+//     let ipfsHash = await pinDirectoryToIPFS(files);
+//     return ipfsHash;
+//   };

@@ -28,11 +28,10 @@ export const generateNFTsFromMetadata = async (
 const generateImageFromMetadata = async (metadata: Metadata) => {
   let attrsMap: Map<string, Attribute> = metadata.attributesMap;
   let filepath = await compositeImages(
-    attrsMap.get(AttributeType.Background).image,
     attrsMap.get(AttributeType.Figure).image,
+    attrsMap.get(AttributeType.Background).image,
     `${metadata.id}`
   );
-  console.log(filepath);
   return filepath;
 };
 
@@ -62,7 +61,7 @@ export const generateJSONFromMetadata = async (
       const data = {
         name: nft.metadata.name,
         description: nft.metadata.description,
-        image: `ipfs://${nftCollection.imagesIpfsHash}/${nft.metadata.id}.png`,
+        image: `https://gateway.pinata.cloud/ipfs/${nftCollection.imagesIpfsHash}/${nft.metadata.id}.png`,
         attributes: nft.metadata.attributesMap,
       };
 

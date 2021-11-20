@@ -1,6 +1,9 @@
 import { generateMetadata } from "./metadata";
 import { generateJSONFromMetadata, generateNFTsFromMetadata } from "./nft";
-import { generateCollectionFromNFTs } from "./collection";
+import {
+  generateCollectionFromNFTs,
+  generateJSONFromCollection,
+} from "./collection";
 import * as dotenv from "dotenv";
 import { resolve } from "path";
 
@@ -18,6 +21,7 @@ async function main(): Promise<void> {
 
   // generate json file of nft
   generateJSONFromMetadata(nftCollection);
+  // generateJSONFromCollection(nftCollection);
 }
 
 // run main
