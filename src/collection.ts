@@ -1,5 +1,5 @@
 import { NFT } from "./nft";
-import { uploadDirectoryToIPFS } from "./ipfs";
+import { uploadDirectoryToIPFS, uploadJSONDirectoryToIPFS } from "./ipfs";
 
 export interface NFTCollection {
   nfts: NFT[];
@@ -24,7 +24,7 @@ export const generateCollectionFromNFTs = async (
 export const generateJSONFromCollection = async (
   collection: NFTCollection
 ): Promise<string> => {
-  let metadataIpfsHash = await uploadDirectoryToIPFS(
+  let metadataIpfsHash = await uploadJSONDirectoryToIPFS(
     "dmall-test-metadata",
     "./output/metadata"
   );

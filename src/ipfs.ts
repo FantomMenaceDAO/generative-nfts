@@ -36,7 +36,7 @@ export const getFormDataFromDirectory = async (name, dir) => {
     // for each file stream, we need to include the
     // correct relative file path
     let relative_path = `${dir}/${file}`;
-    if (relative_path.endsWith(".png")) {
+    if (relative_path.endsWith(".png") || relative_path.endsWith(".json")) {
       data.append(`file`, fs.createReadStream(relative_path), {
         filepath: basePathConverter(dir, relative_path),
       });
@@ -77,16 +77,18 @@ export const uploadDirectoryToIPFS = async (
   name: string,
   directory: string
 ): Promise<string> => {
+  console.log(`uploading ${directory} to IPFS`);
   let files = await getFormDataFromDirectory(name, directory);
   let ipfsHash = await pinDirectoryToIPFS(files);
   return ipfsHash;
 };
 
-// export const uploadJSONDirectoryToIPFS = async (
-//     name: string,
-//     directory: string
-//   ): Promise<string> => {
-//     let files = await getFormDataFromDirectory(name, directory);
-//     let ipfsHash = await pinDirectoryToIPFS(files);
-//     return ipfsHash;
-//   };
+export const uploadJSONDirectoryToIPFS = async (
+  name: string,
+  directory: string
+): Promise<string> => {
+  console.log(`uploading ${directory} to IPFS`);
+  let files = await getFormDataFromDirectory(name, directory);
+  let ipfsHash = await pinDirectoryToIPFS(files);
+  return ipfsHash;
+};

@@ -21,7 +21,7 @@ async function main(): Promise<void> {
 
   // generate json file of nft
   generateJSONFromMetadata(nftCollection);
-  // generateJSONFromCollection(nftCollection);
+  generateJSONFromCollection(nftCollection);
 }
 
 // run main
