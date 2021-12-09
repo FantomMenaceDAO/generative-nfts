@@ -1,6 +1,6 @@
 import * as sharp from "sharp";
 import { Metadata } from "./metadata";
-import { Attribute, AttributeType } from "./attributes";
+import { Attribute, Attributes, TraitType } from "./attributes";
 import * as fs from "fs";
 import { NFTCollection } from "./collection";
 
@@ -26,16 +26,22 @@ export const generateNFTsFromMetadata = async (
 };
 
 const generateImageFromMetadata = async (metadata: Metadata) => {
-  let attrsMap: Map<string, Attribute> = metadata.attributesMap;
+  let attributes: Attributes = metadata.attributes;
   let filepath = await compositeImages(
-    attrsMap.get(AttributeType.Figure).image,
-    attrsMap.get(AttributeType.Background).image,
+    attributes.map((attribute) => attribute.image),
     `${metadata.id}`
   );
   return filepath;
 };
 
 const compositeImages = async (
+  images: string[],
+  filename: string
+): Promise<string> => {
+  return compositeTwoImages(images[0], images[1], filename);
+};
+
+const compositeTwoImages = async (
   topImg: string,
   bottomImg: string,
   filename: string
@@ -58,11 +64,17 @@ export const generateJSONFromMetadata = async (
   try {
     for (let nft of nftCollection.nfts) {
       let filepath = `output/metadata/${nft.metadata.id}.json`;
+      // make sure to take out the local images path before writing to json
+      // this json file will eventually get uploaded to ipfs
+      nft.metadata.attributes = nft.metadata.attributes.map((attribute) => {
+        delete attribute.image;
+        return attribute;
+      });
       const data = {
         name: nft.metadata.name,
         description: nft.metadata.description,
         image: `https://gateway.pinata.cloud/ipfs/${nftCollection.imagesIpfsHash}/${nft.metadata.id}.png`,
-        attributes: nft.metadata.attributesMap,
+        attributes: nft.metadata.attributes,
       };
 
       fs.writeFileSync(

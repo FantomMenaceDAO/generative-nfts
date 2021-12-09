@@ -6,16 +6,15 @@ export interface Distribution {
 
 export interface Distributions extends Array<Distribution> {}
 
-export enum AttributeType {
+export enum TraitType {
   Background = "background",
   Figure = "figure",
 }
 
 export interface Attribute {
-  name?: string;
   value?: string;
   image?: string;
-  attr_type: AttributeType;
+  trait_type: TraitType;
 }
 
 export interface Attributes extends Array<Attribute> {}
@@ -23,27 +22,25 @@ export interface Attributes extends Array<Attribute> {}
 export class AttributeFactory {
   static create(attr: Attribute): Attribute {
     return {
-      name: attr.name,
       value: attr.value,
       image: attr.image,
-      attr_type: attr.attr_type,
+      trait_type: attr.trait_type,
     };
   }
 
-  static createAttributes(attr_type: AttributeType): Attributes {
+  static createAttributes(trait_type: TraitType): Attributes {
     const attributes: Attributes = [];
 
     // get all distributions first
-    let dists = getDistFromAttrType(attr_type);
+    let dists = getDistFromAttrType(trait_type);
 
     // then iterate through them and create the attribute
     for (let dist of dists) {
       for (let i = 0; i < dist.total_number; i++) {
         let attribute = AttributeFactory.create({
-          name: `${dist.name}`,
-          image: `${dist.path}/${i + 1}.png`,
           value: `${dist.name}`,
-          attr_type: attr_type,
+          image: `${dist.path}/${i + 1}.png`,
+          trait_type: trait_type,
         });
         attributes.push(attribute);
       }
@@ -57,11 +54,11 @@ export class AttributeFactory {
   }
 }
 
-function getDistFromAttrType(attr_type: AttributeType): Distributions {
-  switch (attr_type) {
-    case AttributeType.Background:
+function getDistFromAttrType(trait_type: TraitType): Distributions {
+  switch (trait_type) {
+    case TraitType.Background:
       return getBackgrounds();
-    case AttributeType.Figure:
+    case TraitType.Figure:
       return getFigures();
   }
 }
