@@ -5,6 +5,11 @@ export const IPFS_NFT_METADATA_NAME = "dmall-test-metadata";
 export const LOCAL_NFT_IMAGES_PATH = "./output/images";
 export const LOCAL_NFT_METADATA_PATH = "./output/metadata";
 
+export enum TraitType {
+  Background = "background",
+  Figure = "figure",
+}
+
 export function getBackgrounds(): Distributions {
   return [
     { name: "AMC", path: "./input/bg/amc", total_number: 1 },

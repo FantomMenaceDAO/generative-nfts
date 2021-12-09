@@ -1,4 +1,5 @@
-import * as params from "./constants";
+import { TraitType } from "./constants";
+import * as c from "./constants";
 
 export interface Distribution {
   name?: string;
@@ -8,15 +9,10 @@ export interface Distribution {
 
 export interface Distributions extends Array<Distribution> {}
 
-export enum TraitType {
-  Background = "background",
-  Figure = "figure",
-}
-
 export interface Attribute {
   value?: string;
   image?: string;
-  trait_type: TraitType;
+  trait_type: constants.TraitType;
 }
 
 export interface Attributes extends Array<Attribute> {}
@@ -59,8 +55,8 @@ export class AttributeFactory {
 function getDistFromAttrType(trait_type: TraitType): Distributions {
   switch (trait_type) {
     case TraitType.Background:
-      return params.getBackgrounds();
+      return c.getBackgrounds();
     case TraitType.Figure:
-      return params.getFigures();
+      return c.getFigures();
   }
 }

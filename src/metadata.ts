@@ -1,9 +1,5 @@
-import {
-  Attributes,
-  TraitType,
-  Attribute,
-  AttributeFactory as AF,
-} from "./attributes";
+import { Attributes, Attribute, AttributeFactory as AF } from "./attributes";
+import { TraitType } from "./constants";
 
 export interface Metadata {
   id: number;
