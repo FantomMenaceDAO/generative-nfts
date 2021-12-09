@@ -1,4 +1,4 @@
-import { Distributions } from "./attributes";
+import { Distributions } from "./interfaces/distributions";
 
 export const IPFS_NFT_IMAGES_NAME = "dmall-test-images";
 export const IPFS_NFT_METADATA_NAME = "dmall-test-metadata";

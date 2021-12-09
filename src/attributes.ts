@@ -1,18 +1,11 @@
 import { TraitType } from "./constants";
 import * as c from "./constants";
-
-export interface Distribution {
-  name?: string;
-  path?: string;
-  total_number?: number;
-}
-
-export interface Distributions extends Array<Distribution> {}
+import { Distributions } from "./interfaces/distributions";
 
 export interface Attribute {
   value?: string;
   image?: string;
-  trait_type: constants.TraitType;
+  trait_type: TraitType;
 }
 
 export interface Attributes extends Array<Attribute> {}

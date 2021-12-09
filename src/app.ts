@@ -1,6 +1,6 @@
 import { generateMetadata } from "./metadata";
 import { generateJSONFromMetadata, generateNFTsFromMetadata } from "./nft";
-import { generateJSONFromCollection, NFTCollection } from "./collection";
+import { NFTCollection } from "./collection";
 import { uploadDirectoryToIPFS, uploadJSONDirectoryToIPFS } from "./ipfs";
 import * as dotenv from "dotenv";
 import * as constants from "./constants";

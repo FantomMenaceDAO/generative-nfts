@@ -1,8 +1,8 @@
 import * as sharp from "sharp";
 import { Metadata } from "./metadata";
-import { Attribute, Attributes, TraitType } from "./attributes";
+import { Attributes } from "./attributes";
 import * as fs from "fs";
-import { NFTCollection } from "./collection";
+import { NFTCollection } from "./interfaces/collection";
 
 export interface NFT {
   localImagePath: string;

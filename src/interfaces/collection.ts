@@ -1,5 +1,5 @@
-import { NFT } from "./nft";
-import { uploadJSONDirectoryToIPFS } from "./ipfs";
+import { NFT } from "../nft";
+
 export interface NFTCollection {
   nfts: NFT[];
   imagesIpfsHash: string;
