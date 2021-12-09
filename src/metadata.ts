@@ -39,8 +39,8 @@ export function generateMetadata(): Metadata[] {
 
       const nft_metadata: Metadata = {
         id: counter,
-        name: `${figures[j].value} at ${backgrounds[k].value}`,
-        description: "this is an nft",
+        description: `${figures[j].value} at ${backgrounds[k].value}`,
+        name: "Darth Malls #" + counter,
         attributes: nft_attributes,
       };
       nfts_metadata.push(nft_metadata);
