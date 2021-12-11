@@ -1,6 +1,7 @@
 import { TraitType } from "./constants";
 import * as c from "./constants";
 import { Distributions } from "./interfaces/distributions";
+import { Metadata } from "./metadata";
 
 export interface Attribute {
   value?: string;
@@ -42,6 +43,19 @@ export class AttributeFactory {
       .map((v) => ({ v, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ v }) => v);
+  }
+
+  static getSpecialNFTsAttributes(metadata: Attributes): Attributes {
+    let attributes: Attributes = [];
+    for (let meta of metadata) {
+      let attribute = AttributeFactory.create({
+        value: meta.value,
+        image: meta.image,
+        trait_type: meta.trait_type,
+      });
+      attributes.push(attribute);
+    }
+    return attributes;
   }
 }
 

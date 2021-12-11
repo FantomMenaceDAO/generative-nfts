@@ -1,6 +1,6 @@
 import { generateMetadata } from "./metadata";
-import { generateJSONFromMetadata, generateNFTsFromMetadata } from "./nft";
-import { NFTCollection } from "./collection";
+import { generateJSONFromMetadata, generateNFTs } from "./nft";
+import { NFTCollection } from "./interfaces/collection";
 import { uploadDirectoryToIPFS, uploadJSONDirectoryToIPFS } from "./ipfs";
 import * as dotenv from "dotenv";
 import * as constants from "./constants";
@@ -12,7 +12,7 @@ async function main(): Promise<void> {
   let metadata = generateMetadata();
 
   // generates images to fs and returns NFT objects
-  let nfts = await generateNFTsFromMetadata(metadata);
+  let nfts = await generateNFTs(metadata);
 
   // upload images to IPFS and get root hash for images
   let imagesIpfsHash: string = await uploadDirectoryToIPFS(

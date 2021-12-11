@@ -2,14 +2,10 @@ import { Attributes, Attribute, AttributeFactory as AF } from "./attributes";
 import { TraitType } from "./constants";
 
 export interface Metadata {
-  id: number;
-  name: string;
   description: string;
   image?: string;
   attributes: Attributes;
 }
-
-const BASE_NAME = "darth malls";
 
 export function generateMetadata(): Metadata[] {
   // get all attribute types
@@ -17,8 +13,6 @@ export function generateMetadata(): Metadata[] {
     AF.createAttributes(TraitType.Figure),
     AF.createAttributes(TraitType.Background),
   ];
-
-  let counter = 1;
 
   const nfts_metadata: Metadata[] = [];
 
@@ -33,16 +27,24 @@ export function generateMetadata(): Metadata[] {
       nft_attributes.push(figures[j]);
       nft_attributes.push(backgrounds[k]);
 
-      const nft_metadata: Metadata = {
-        id: counter,
+      const nft_metadata = MetadataFactory.create({
         description: `${figures[j].value} at ${backgrounds[k].value}`,
-        name: "Darth Malls #" + counter,
         attributes: nft_attributes,
-      };
+      });
+
       nfts_metadata.push(nft_metadata);
-      counter++;
     }
   }
 
   return nfts_metadata;
+}
+
+export class MetadataFactory {
+  static create(meta: Metadata): Metadata {
+    return {
+      image: meta.image,
+      description: meta.description,
+      attributes: meta.attributes,
+    };
+  }
 }
