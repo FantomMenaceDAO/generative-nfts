@@ -60,7 +60,10 @@ export function getSpecialNFTsMetadata(): Metadata[] {
       attributes: AttributeFactory.getSpecialNFTsAttributes([
         { value: "Regina", trait_type: TraitType.Figure },
         { value: "The mall, of course", trait_type: TraitType.Background },
-        { value: "Being very mean", trait_type: TraitType.Disposition },
+        {
+          value: "On Wednesdays we wear pink",
+          trait_type: TraitType.Disposition,
+        },
       ]),
     },
     {
@@ -79,6 +82,15 @@ export function getSpecialNFTsMetadata(): Metadata[] {
         { value: "Obi Wan", trait_type: TraitType.Figure },
         { value: "Somewhere happy", trait_type: TraitType.Background },
         { value: "Happy", trait_type: TraitType.Disposition },
+      ]),
+    },
+    {
+      description: "Darth Jar Jar",
+      image: "./input/special/8.png",
+      attributes: AttributeFactory.getSpecialNFTsAttributes([
+        { value: "Meesa Sithlord", trait_type: TraitType.Figure },
+        { value: "Meesa Reel Phatom Menace", trait_type: TraitType.Background },
+        { value: "Lowkey being overlooked", trait_type: TraitType.Disposition },
       ]),
     },
   ];
@@ -127,6 +139,47 @@ export function getBackgrounds(): Distributions {
     },
     { name: "TJ Maxx", path: "./input/bg/tj_maxx", total_number: 1 },
     { name: "The Ginza", path: "./input/bg/tokyo", total_number: 1 },
+    { name: "Foot Locker", path: "./input/bg/foot_locker", total_number: 1 },
+    { name: "Tim Hortons", path: "./input/bg/tim_hortons", total_number: 1 },
+    {
+      name: "Cheesecake Factory",
+      path: "./input/bg/cheesecake",
+      total_number: 1,
+    },
+    {
+      name: "Barnes & Noble",
+      path: "./input/bg/barnes_noble",
+      total_number: 1,
+    },
+    {
+      name: "Victorias Secret",
+      path: "./input/bg/victorias_secret",
+      total_number: 1,
+    },
+    {
+      name: "Sharper Image",
+      path: "./input/bg/sharper_image",
+      total_number: 1,
+    },
+    { name: "Sbarro", path: "./input/bg/sbarro", total_number: 1 },
+    {
+      name: "Baskin Robins",
+      path: "./input/bg/baskin_robins",
+      total_number: 1,
+    },
+    { name: "Zales", path: "./input/bg/zales", total_number: 1 },
+    { name: "Claires", path: "./input/bg/claires", total_number: 1 },
+    { name: "Radioshack", path: "./input/bg/radioshack", total_number: 1 },
+    { name: "Pac Sun", path: "./input/bg/pacsun", total_number: 1 },
+    {
+      name: "Abercrombie & Fitch",
+      path: "./input/bg/abercrombie",
+      total_number: 1,
+    },
+    { name: "Brookstone", path: "./input/bg/brookstone", total_number: 1 },
+    { name: "Hot Topic", path: "./input/bg/hot_topic", total_number: 1 },
+    { name: "Mrs Fields", path: "./input/bg/mrs_fields", total_number: 1 },
+    { name: "Walmart", path: "./input/bg/walmart", total_number: 1 },
   ];
 }
 
@@ -213,7 +266,7 @@ export function getFigures(): Distributions {
     {
       name: "Clonetrooper",
       path: "./input/figure/light/clonetrooper",
-      total_number: 1,
+      total_number: 2,
     },
     {
       name: "First Order Trooper",
@@ -251,8 +304,58 @@ export function getFigures(): Distributions {
       total_number: 1,
     },
     {
-      name: "Tusken Raider",
-      path: "./input/figure/light/tusken_raider",
+      name: "Rey",
+      path: "./input/figure/light/rey",
+      total_number: 1,
+    },
+    {
+      name: "Padme",
+      path: "./input/figure/light/padme",
+      total_number: 2,
+    },
+    {
+      name: "Obi Wan Kenobi",
+      path: "./input/figure/light/obi_wan",
+      total_number: 1,
+    },
+    {
+      name: "Mace Windu",
+      path: "./input/figure/light/mace_windu",
+      total_number: 1,
+    },
+    {
+      name: "Baby Yoda",
+      path: "./input/figure/light/baby_yoda",
+      total_number: 1,
+    },
+    {
+      name: "Queen Amidala",
+      path: "./input/figure/light/amidala",
+      total_number: 1,
+    },
+    {
+      name: "Rugor Nass",
+      path: "./input/figure/dark/rugor_nass",
+      total_number: 1,
+    },
+    {
+      name: "Princess Leia",
+      path: "./input/figure/light/leia",
+      total_number: 3,
+    },
+    {
+      name: "Luke",
+      path: "./input/figure/light/luke",
+      total_number: 2,
+    },
+    {
+      name: "Han Solo",
+      path: "./input/figure/light/han_solo",
+      total_number: 1,
+    },
+    {
+      name: "Some Droids",
+      path: "./input/figure/light/droids",
       total_number: 1,
     },
   ];

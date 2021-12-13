@@ -102,6 +102,8 @@ const compositeTwoImages = async (
       .toFile(filepath);
     return filepath;
   } catch (error) {
+    console.log(`error while importing: ${topImg}`);
+    console.log(`error while importing: ${bottomImg}`);
     console.log(error);
   }
 };
@@ -121,7 +123,7 @@ export const generateJSONFromMetadata = async (
       const data = {
         name: nft.name,
         description: nft.metadata.description,
-        image: `https://gateway.pinata.cloud/ipfs/${nftCollection.imagesIpfsHash}/${nft.id}.png`,
+        image: `https://gateway.ipfs.io/ipfs/${nftCollection.imagesIpfsHash}/${nft.id}.png`,
         attributes: nft.metadata.attributes,
       };
 
